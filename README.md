@@ -1,3 +1,9 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/JosephOzomata/JosephOzomata/main/github-metrics.svg" alt="Metrics" />
+
+<img
+  src="./github-metrics.svg"
+  alt="Joseph Ozomata GitHub Metrics"
+  width="100%"
+/>
+
 </div>
