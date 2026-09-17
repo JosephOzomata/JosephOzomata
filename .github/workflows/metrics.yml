@@ -1,49 +1,65 @@
-name: Metrics
+name: GitHub Metrics
+
 on:
-  schedule: [{cron: "0 0 * * *"}] # Runs daily at midnight
+  schedule:
+    - cron: "0 0 * * *"
   workflow_dispatch:
-  push: {branches: ["master", "main"]}
+
 jobs:
   github-metrics:
     runs-on: ubuntu-latest
+
     permissions:
       contents: write
+
     steps:
-      - uses: lowlighter/metrics@latest
+      - name: Generate GitHub Metrics
+        uses: lowlighter/metrics@latest
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          user: JosephOzomata
+          token: ${{ secrets.METRICS_TOKEN }}
+
+          user: ${{ github.repository_owner }}
+
           template: classic
-          base: header, activity, community, repositories, metadata
+          filename: github-metrics.svg
+
+          config_display: large
           config_timezone: Africa/Lagos
+
+          base: header, activity, community, repositories, metadata
+
           plugin_isocalendar: yes
-          plugin_isocalendar_duration: full-year
-          plugin_languages: yes
-          plugin_languages_analysis_timeout: 15
-          plugin_languages_categories: markup, programming
-          plugin_languages_colors: github
-          plugin_languages_limit: 8
-          plugin_languages_recent_categories: markup, programming
-          plugin_languages_recent_days: 14
-          plugin_languages_recent_load: 300
-          plugin_languages_sections: most-used
-          plugin_languages_threshold: 0%
+          plugin_isocalendar_duration: half-year
+
           plugin_habits: yes
-          plugin_habits_charts: yes
+          plugin_habits_from: 200
           plugin_habits_days: 14
           plugin_habits_facts: yes
-          plugin_habits_from: 200
-          plugin_habits_languages_limit: 8
-          plugin_habits_languages_threshold: 0%
-          plugin_pagespeed: yes
-          plugin_pagespeed_url: https://github.com/JosephOzomata # Change this to your website if you have one
-          plugin_pagespeed_detailed: yes
-          plugin_pagespeed_screenshot: no
-          plugin_music: yes
-          plugin_music_provider: spotify
-          plugin_music_token: ${{ secrets.SPOTIFY_TOKEN }} # See Step 4
-          plugin_music_limit: 4
-          plugin_projects: yes
-          plugin_projects_limit: 4
-          plugin_technologies: yes
-          plugin_technologies_limit: 0
+          plugin_habits_charts: yes
+
+          plugin_languages: yes
+          plugin_languages_limit: 8
+          plugin_languages_sections: most-used
+          plugin_languages_details: percentage
+          plugin_languages_indepth: yes
+
+          plugin_topics: yes
+          plugin_topics_mode: icons
+          plugin_topics_limit: 20
+
+          plugin_activity: yes
+          plugin_activity_limit: 5
+          plugin_activity_days: 14
+          plugin_activity_filter: all
+
+          plugin_notable: yes
+          plugin_notable_repositories: yes
+
+          plugin_achievements: yes
+          plugin_achievements_display: compact
+          plugin_achievements_threshold: C
+
+          plugin_people: yes
+          plugin_people_types: followers, following
+
+          plugin_lines: yes
