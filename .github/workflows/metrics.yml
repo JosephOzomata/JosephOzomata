@@ -63,3 +63,10 @@ jobs:
           plugin_people_types: followers, following
 
           plugin_lines: yes
+
+          # PageSpeed Insights
+          plugin_pagespeed: yes
+          plugin_pagespeed_token: ${{ secrets.PAGESPEED_TOKEN }}
+          plugin_pagespeed_url: https://ozomata-joseph-portfolio.web.app/
+          plugin_pagespeed_detailed: yes
+          plugin_pagespeed_screenshot: yes
